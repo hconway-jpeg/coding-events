@@ -4,12 +4,17 @@
 
 <body>
 
-    <h1>Create Event</h1>
-
     <nav th:replace="fragments :: navFrag"></nav>
 
-    <form method="post" action="/events/create">
-        <input type="text" name="eventName">
+    <form method="post">
+        <label>
+            Event Name
+            <input type="text" name="eventName">
+        </label>
+        <label>
+            Description
+            <input type="text" name="eventDescription">
+        </label>
         <input type="submit" value="Create Event">
     </form>
 
