@@ -11,11 +11,16 @@
 <body>
 
 <nav th:fragment="navFrag">
+    <h1 th:text="${title}">Coding Events</h1>
     <ul>
         <li><a href="/events">All Events</a></li>
         <li><a href="/events/create">Create Event</a></li>
     </ul>
 </nav>
+
+<td th:fragment="fancyFeastAddress">666 Furry Ln.</td>
+<td th:fragment="nerdFestAddress">4 Privet Dr.</td>
+<td th:fragment="electricBoogalooAddress">1973 Sizzle St.</td>
 
 </body>
 </html>

@@ -10,11 +10,28 @@
 
 <p th:unless="${events} and ${events.size()}">No Events Scheduled; Check back later!</p>
 
-<ul>
+<table class="center">
+    <tr>
+        <th>Event Name</th>
+        <th>Description</th>
+        <th>Address</th>
+    </tr>
     <th:block th:each="event : ${events}">
-        <li th:text="${event}"></li>
+        <tr>
+            <td th:text="${event.key}"></td>
+            <td th:text="${event.value}"></td>
+            <th:block th:if='${event.key.equals("Fancy Feast")}'>
+                <td th:replace="fragments :: fancyFeastAddress"></td>
+            </th:block>
+            <th:block th:if='${event.key.equals("Electric Boogaloo")}'>
+                <td th:replace="fragments :: electricBoogalooAddress"></td>
+            </th:block>
+            <th:block th:if='${event.key.equals("NerdFest")}'>
+                <td th:replace="fragments :: nerdFestAddress"></td>
+            </th:block>
+        </tr>
     </th:block>
-</ul>
+</table>
 
 </body>
 </html>
