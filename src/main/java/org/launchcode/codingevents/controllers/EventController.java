@@ -25,15 +25,34 @@ public class EventController {
     }
 
     @GetMapping("create")
-    public String renderCreateEventForm(Model model) {
+    public String processCreateEventForm(Model model) {
         model.addAttribute("title", "Create Event");
         return "events/create";
     }
 
     @PostMapping("create")
     public String createEvent(@RequestParam String eventName, @RequestParam String eventDescription) {
-        EventData.add(new Event(eventName, eventDescription));
+        if (eventName != "" && eventDescription != "") {
+            EventData.add(new Event(eventName, eventDescription));
+        }
         return "redirect:";
     }
 
+    @GetMapping("delete")
+    public String displayDeleteEventForm(Model model) {
+        model.addAttribute("title", "Delete Events");
+        model.addAttribute("events", EventData.getAll());
+        return "events/delete";
+    }
+
+    @PostMapping("delete")
+    public String processDeleteEventsForm(@RequestParam(required = false) int[] eventIds) {
+        if (eventIds != null) {
+            for (int id : eventIds) {
+                EventData.remove(id);
+            }
+        }
+        return "redirect:";
+    }
 }
+
