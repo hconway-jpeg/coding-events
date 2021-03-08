@@ -9,15 +9,15 @@ import java.util.Objects;
 
 public class Event {
 
-    @NotBlank
+    @NotBlank(message = "Name field required")
     @Size(min = 3, max = 20, message = "Name must be between 3 and 50 characters.")
     private String name;
 
     @Size(max = 500, message = "Description too long.")
     private String description;
 
-    @NotBlank
-    @Email(message = "Invalid email; try again")
+    @NotBlank(message = "Email field required")
+    @Email(message = "Invalid email")
     private String contactEmail;
 
     private int id;
@@ -29,6 +29,8 @@ public class Event {
         this.id = nextId;
         nextId++;
     }
+
+    public Event() { }
 
     public String getName() {
         return name;
