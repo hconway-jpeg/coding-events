@@ -10,12 +10,13 @@ import java.util.Objects;
 public class Event {
 
     @NotBlank
-    @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters.")
+    @Size(min = 3, max = 20, message = "Name must be between 3 and 50 characters.")
     private String name;
 
     @Size(max = 500, message = "Description too long.")
     private String description;
 
+    @NotBlank
     @Email(message = "Invalid email; try again")
     private String contactEmail;
 

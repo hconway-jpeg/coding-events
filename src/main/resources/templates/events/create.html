@@ -6,6 +6,8 @@
 
     <nav th:replace="fragments :: navFrag"></nav>
 
+    <p th:text="${errorMsg}" style="color: red;"></p>
+
     <form method="post">
         <div class="form-group">
             <label>
