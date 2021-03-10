@@ -11,10 +11,14 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Event ID</th>
-            <th>Event Name</th>
+            <th>ID</th>
+            <th>Name</th>
             <th>Description</th>
             <th>Contact Email</th>
+            <th>Venue</th>
+            <th>Registration Required?</th>
+            <th># of Attendees</th>
+            <th>Date</th>
         </tr>
     </thead>
     <tr th:each="event : ${events}">
@@ -22,6 +26,10 @@
         <td th:text="${event.name}">Event Name</td>
         <td th:text="${event.description}">Event Description</td>
         <td th:text="${event.contactEmail}">Contact Email</td>
+        <td th:text="${event.eventLocation}">Event Location</td>
+        <td th:text="${event.mustRegister}">Registration?</td>
+        <td th:text="${event.numberAttending}">Number of Attendees</td>
+        <td th:text="${event.eventDate}">Event Date</td>
     </tr>
 </table>
 

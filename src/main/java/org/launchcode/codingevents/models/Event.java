@@ -1,32 +1,51 @@
 package org.launchcode.codingevents.models;
 
-import org.springframework.boot.convert.DataSizeUnit;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 public class Event {
 
-    @NotBlank(message = "Name field required")
-    @Size(min = 3, max = 20, message = "Name must be between 3 and 50 characters.")
+    @NotBlank(message = "Field required")
+    @Size(min = 3, max = 20, message = "Must be between 3 and 50 characters")
     private String name;
 
-    @Size(max = 500, message = "Description too long.")
+    @Size(max = 500, message = "Max 500 characters")
     private String description;
 
-    @NotBlank(message = "Email field required")
+    @NotBlank(message = "Field required")
     @Email(message = "Invalid email")
     private String contactEmail;
+
+    @NotBlank(message = "Field required")
+    @NotNull(message = "Field required")
+    private String eventLocation;
+
+    @AssertTrue
+    private Boolean mustRegister = true;
+
+    @NotNull(message = "Field required")
+    @Min(value = 1, message = "Must be greater than 0")
+    private Integer numberAttending;
+
+    @Future(message = "Cannot be in past")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date eventDate;
 
     private int id;
     private static int nextId = 1;
 
-    public Event(String name, String description, String contactEmail) {
+    public Event(String name, String description, String contactEmail, String eventLocation, Integer numberAttending, Date eventDate) {
         this.name = name;
         this.description = description;
         this.id = nextId;
+        this.contactEmail = contactEmail;
+        this.eventLocation = eventLocation;
+        this.numberAttending = numberAttending;
+        this.eventDate = eventDate;
         nextId++;
     }
 
@@ -48,6 +67,18 @@ public class Event {
 
     public String getContactEmail() { return contactEmail; }
     public void setContactEmail(String contactEmail) { this.contactEmail = contactEmail; }
+
+    public String getEventLocation() { return eventLocation; }
+    public void setEventLocation(String eventLocation) { this.eventLocation = eventLocation; }
+
+    public Boolean getMustRegister() { return mustRegister; }
+    public void setMustRegister(Boolean mustRegister) { this.mustRegister = mustRegister; }
+
+    public Integer getNumberAttending() { return numberAttending; }
+    public void setNumberAttending(Integer numberAttending) { this.numberAttending = numberAttending; }
+
+    public Date getEventDate() { return eventDate; }
+    public void setEventDate(Date eventDate) { this.eventDate = eventDate; }
 
     public int getId() { return id; }
 
