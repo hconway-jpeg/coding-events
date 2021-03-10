@@ -3,11 +3,13 @@ package org.launchcode.codingevents.models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
 public class Event {
+
+    private int id;
+    private static int nextId = 1;
 
     @NotBlank(message = "Field required")
     @Size(min = 3, max = 20, message = "Must be between 3 and 50 characters")
@@ -35,21 +37,20 @@ public class Event {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date eventDate;
 
-    private int id;
-    private static int nextId = 1;
-
     public Event(String name, String description, String contactEmail, String eventLocation, Integer numberAttending, Date eventDate) {
+        this();
         this.name = name;
         this.description = description;
-        this.id = nextId;
         this.contactEmail = contactEmail;
         this.eventLocation = eventLocation;
         this.numberAttending = numberAttending;
         this.eventDate = eventDate;
-        nextId++;
     }
 
-    public Event() { }
+    public Event() {
+        this.id = nextId;
+        nextId++;
+    }
 
     public String getName() {
         return name;

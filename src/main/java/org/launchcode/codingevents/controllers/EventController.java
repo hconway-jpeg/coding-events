@@ -18,20 +18,20 @@ public class EventController {
 
     @GetMapping
     public String displayAllEvents(Model model) {
-        model.addAttribute("events", EventData.getAll());
         model.addAttribute("title", "All Events");
+        model.addAttribute("events", EventData.getAll());
         return "events/index";
     }
 
     @GetMapping("create")
-    public String processCreateEventForm(Model model) {
+    public String displayCreateEventForm(Model model) {
         model.addAttribute("title", "Create Event");
         model.addAttribute(new Event());
         return "events/create";
     }
 
     @PostMapping("create")
-    public String createEvent(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
+    public String processCreateEventForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Event");
             return "events/create";
