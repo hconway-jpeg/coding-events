@@ -15,6 +15,7 @@
             <th>Event Name</th>
             <th>Description</th>
             <th>Contact Email</th>
+            <th>Type</th>
         </tr>
     </thead>
     <tr th:each="event : ${events}">
@@ -22,6 +23,7 @@
         <td th:text="${event.name}">Event Name</td>
         <td th:text="${event.description}">Event Description</td>
         <td th:text="${event.contactEmail}">Contact Email</td>
+        <td th:text="${event.type.displayName}">Event Type</td>
     </tr>
 </table>
 
