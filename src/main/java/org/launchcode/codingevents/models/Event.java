@@ -24,13 +24,15 @@ public class Event {
     private static int nextId = 1;
 
     public Event(String name, String description, String contactEmail) {
+        this();
         this.name = name;
         this.description = description;
+    }
+
+    public Event() {
         this.id = nextId;
         nextId++;
     }
-
-    public Event() { }
 
     public String getName() {
         return name;
