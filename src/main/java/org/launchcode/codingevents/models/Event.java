@@ -2,12 +2,20 @@ package org.launchcode.codingevents.models;
 
 import org.springframework.boot.convert.DataSizeUnit;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
+@Entity
 public class Event {
+
+    @Id
+    @GeneratedValue
+    private int id;
 
     @NotBlank(message = "Name field required")
     @Size(min = 3, max = 20, message = "Name must be between 3 and 50 characters.")
@@ -22,20 +30,13 @@ public class Event {
 
     private EventType type;
 
-    private int id;
-    private static int nextId = 1;
-
     public Event(String name, String description, String contactEmail, EventType type) {
-        this();
         this.name = name;
         this.description = description;
         this.type = type;
     }
-
-    public Event() {
-        this.id = nextId;
-        nextId++;
-    }
+    //no-arg constructor
+    public Event() {}
 
     public String getName() {
         return name;
