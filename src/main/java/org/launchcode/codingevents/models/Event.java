@@ -30,13 +30,14 @@ public class Event {
 
     private EventType type;
 
+    //no-arg constructor
+    public Event() {}
+
     public Event(String name, String description, String contactEmail, EventType type) {
         this.name = name;
         this.description = description;
         this.type = type;
     }
-    //no-arg constructor
-    public Event() {}
 
     public String getName() {
         return name;
