@@ -6,11 +6,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.*;
 
 @Entity
-public class EventCategory {
-
-    @Id
-    @GeneratedValue
-    private int id;
+public class EventCategory extends AbstractEntity {
 
     @NotBlank(message = "Name field required")
     @Size(min = 3, max = 20, message = "Name must be between 3 and 50 characters.")
@@ -21,8 +17,6 @@ public class EventCategory {
     public EventCategory (String name) {
         this.name = name;
     }
-
-    public int getId() { return id; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
