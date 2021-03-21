@@ -5,8 +5,10 @@ import org.springframework.boot.convert.DataSizeUnit;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
@@ -24,15 +26,17 @@ public class Event extends AbstractEntity {
     @Email(message = "Invalid email")
     private String contactEmail;
 
-    private EventType type;
+    @ManyToOne
+    @NotNull(message = "Category required")
+    private EventCategory eventCategory;
 
     //no-arg constructor
     public Event() {}
 
-    public Event(String name, String description, String contactEmail, EventType type) {
+    public Event(String name, String description, String contactEmail, EventCategory eventCategory) {
         this.name = name;
         this.description = description;
-        this.type = type;
+        this.eventCategory = eventCategory;
     }
 
     public String getName() {
@@ -52,8 +56,8 @@ public class Event extends AbstractEntity {
     public String getContactEmail() { return contactEmail; }
     public void setContactEmail(String contactEmail) { this.contactEmail = contactEmail; }
 
-    public EventType getType() { return type; }
-    public void setType(EventType type) { this.type = type; }
+    public EventCategory getEventCategory() { return eventCategory; }
+    public void setType(EventCategory eventCategory) { this.eventCategory = eventCategory; }
 
     @Override
     public String toString() {

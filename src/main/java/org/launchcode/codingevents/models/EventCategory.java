@@ -8,13 +8,12 @@ import javax.validation.constraints.*;
 @Entity
 public class EventCategory extends AbstractEntity {
 
-    @NotBlank(message = "Name field required")
     @Size(min = 3, max = 20, message = "Name must be between 3 and 50 characters.")
     private String name;
 
     public EventCategory () {}
 
-    public EventCategory (String name) {
+    public EventCategory (@Size(min = 3, max = 20, message = "Name must be between 3 and 50 characters.") String name) {
         this.name = name;
     }
 
