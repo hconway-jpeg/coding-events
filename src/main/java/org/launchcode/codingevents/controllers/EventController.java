@@ -11,6 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("events")
@@ -23,9 +24,20 @@ public class EventController {
     private EventCategoryRepository eventCategoryRepository;
 
     @GetMapping
-    public String displayAllEvents(Model model) {
-        model.addAttribute("title", "All Events");
-        model.addAttribute("events", eventRepository.findAll());
+    public String displayAllEvents(@RequestParam(required = false) Integer categoryId, Model model) {
+        if (categoryId == null) {
+            model.addAttribute("title", "All Events");
+            model.addAttribute("events", eventRepository.findAll());
+        } else {
+            Optional<EventCategory> result = eventCategoryRepository.findById(categoryId);
+            if (result.isEmpty()) {
+                model.addAttribute("title", "Invalid Category ID: " + categoryId);
+            } else {
+                EventCategory category = result.get();
+                model.addAttribute("title", category.getName() + " Events");
+                model.addAttribute("events", category.getEvents());
+            }
+        }
         return "events/index";
     }
 
@@ -45,7 +57,6 @@ public class EventController {
             model.addAttribute("categories", eventCategoryRepository.findAll());
             return "events/create";
         }
-
         eventRepository.save(newEvent);
         return "redirect:";
     }

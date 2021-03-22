@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 public class Event extends AbstractEntity {
 
     @NotBlank(message = "Name field required")
-    @Size(min = 3, max = 20, message = "Name must be between 3 and 50 characters.")
+    @Size(min = 3, max = 100, message = "Name must be between 3 and 100 characters.")
     private String name;
 
     @Size(max = 500, message = "Description too long.")
