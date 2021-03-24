@@ -5,6 +5,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static javax.persistence.CascadeType.*;
 
 @Entity
@@ -22,6 +25,9 @@ public class Event extends AbstractEntity {
     @ManyToOne
     @NotNull(message = "Category required")
     private EventCategory eventCategory;
+
+    @ManyToMany
+    private final List<Tag> tags = new ArrayList<>();
 
     //no-arg constructor
     public Event() {}
@@ -44,6 +50,14 @@ public class Event extends AbstractEntity {
 
     public EventCategory getEventCategory() { return eventCategory; }
     public void setEventCategory(EventCategory eventCategory) { this.eventCategory = eventCategory; }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
+    }
 
     @Override
     public String toString() {
