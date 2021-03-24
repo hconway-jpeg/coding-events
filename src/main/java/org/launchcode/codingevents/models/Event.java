@@ -1,11 +1,11 @@
 package org.launchcode.codingevents.models;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+
+import static javax.persistence.CascadeType.*;
 
 @Entity
 public class Event extends AbstractEntity {
@@ -14,12 +14,10 @@ public class Event extends AbstractEntity {
     @Size(min = 3, max = 100, message = "Name must be between 3 and 100 characters.")
     private String name;
 
-    @Size(max = 500, message = "Description too long.")
-    private String description;
-
-    @NotBlank(message = "Email field required")
-    @Email(message = "Invalid email")
-    private String contactEmail;
+    @OneToOne(cascade = ALL)
+    @Valid
+    @NotNull
+    private EventDetails eventDetails;
 
     @ManyToOne
     @NotNull(message = "Category required")
@@ -28,20 +26,21 @@ public class Event extends AbstractEntity {
     //no-arg constructor
     public Event() {}
 
-    public Event(String name, String description, String contactEmail, EventCategory eventCategory) {
+    public Event(String name,  EventCategory eventCategory) {
         this.name = name;
-        this.description = description;
         this.eventCategory = eventCategory;
     }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public EventDetails getEventDetails() {
+        return eventDetails;
+    }
 
-    public String getContactEmail() { return contactEmail; }
-    public void setContactEmail(String contactEmail) { this.contactEmail = contactEmail; }
+    public void setEventDetails(EventDetails eventDetails) {
+        this.eventDetails = eventDetails;
+    }
 
     public EventCategory getEventCategory() { return eventCategory; }
     public void setEventCategory(EventCategory eventCategory) { this.eventCategory = eventCategory; }

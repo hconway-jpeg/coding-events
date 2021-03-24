@@ -21,8 +21,8 @@
     <tr th:each="event : ${events}">
         <td th:text="${event.id}">Event ID</td>
         <td th:text="${event.name}">Event Name</td>
-        <td th:text="${event.description}">Event Description</td>
-        <td th:text="${event.contactEmail}">Contact Email</td>
+        <td th:text="${event.eventDetails.description}">Event Description</td>
+        <td th:text="${event.eventDetails.contactEmail}">Contact Email</td>
         <td th:text="${event.eventCategory.name}">Category</td>
     </tr>
 </table>
